@@ -1,0 +1,29 @@
+{
+  "name": "pk-ts-api-lib",
+  "author": "Paul Kirkaas",
+  "license": "UNLICENSED",
+  "description": "TS/JS Utilities for NodeJS Express APIs, including common & Node JS functions",
+  "type": "module",
+  "module": "./dist/esm/index.js",
+  "main": "./dist/cjs/index.js",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "default": "./dist/cjs/index.js",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./tsconfig.cjs.json": "./tsconfig.cjs.json",
+    "./tsconfig.json": "./tsconfig.json"
+  },
+  "engines": {
+    "node": ">= 18.0.0"
+  },
+  "scripts": {
+    "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
+    "clean": "rm -rf ./dist ./node_modules package-lock.json && npm i"
+  },
+  "dependencies": {
+    "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working"
+  }
+}
