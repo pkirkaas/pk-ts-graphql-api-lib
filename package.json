@@ -24,6 +24,20 @@
     "clean": "rm -rf ./dist ./node_modules package-lock.json && npm i"
   },
   "dependencies": {
-    "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working"
+    "bcrypt": "*",
+    "body-parser": "*",
+    "compression": "*",
+    "connect-sqlite3": "^0.9.13",
+    "cookie-parser": "*",
+    "cors": "*",
+    "evp_bytestokey": "*",
+    "express": "*",
+    "express-async-errors": "*",
+    "jsonwebtoken": "*",
+    "kill-port": "*",
+    "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working",
+    "reflect-metadata": "*",
+    "rxjs": "*",
+    "serialize-error": "*"
   }
 }
