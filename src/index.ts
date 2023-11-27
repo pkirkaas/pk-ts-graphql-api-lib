@@ -3,3 +3,4 @@
  */
 
 export * from './lib.js';
+export * from 'pk-ts-node-lib';
