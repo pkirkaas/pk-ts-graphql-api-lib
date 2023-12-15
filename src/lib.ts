@@ -49,11 +49,14 @@ export let app: any = null;
  * @return an app instance - express, NestJS, etc
  */
 export function getApp(anApp:any = null) {
+	console.log(`In getApp`);
 	if (!app) {
 		if (anApp) {
 			app = anApp;
 		}
 	} else {
+
+	console.log(`Initializing the app In getApp`);
 		app = express();
 	}
 	return app;
@@ -100,7 +103,6 @@ export async function initApp(opts: GenObj = {}) {
 		app = getApp();
 	}
 	*/
-	app = express();
 	//let inApp = getApp();
 	//let toIA = typeOf(inApp);
 	let toIA = 'tst';
@@ -122,9 +124,44 @@ export async function initApp(opts: GenObj = {}) {
 	let settings = Object.assign({}, defaults, opts);
 
 	//settings.app = getApp(settings.app);
+	if (settings.killPort) {
+		await killPort(getPort());
+	}
 
 	settings.port = getPort(settings.port);
 	console.log(`Thinking port is: [${settings.port}]`);
+	let appInitOpts: GenObj = {};
+
+	app = express();
+	if (settings.apiBase) {
+		let apiBase = settings.apiBase;
+		let apiRouter = express.Router();
+		apiRouter.get('/', (req, res) => {
+			res.json( { this: "root" });
+    });
+		app.use(apiBase, apiRouter);
+		//app = express({ baseUrl: apiBase });
+		//app = express({ basepath: apiBase });
+		//app.set('base', apiBase);
+		console.log(`Trying to use apiBase? Pre...`, apiBase);
+		//let apiRouter = express.Router();
+		//app.use(settings.apiBase, apiRouter);
+		/*
+			console.log(`Trying to use apiBase? Pre...`, settings.apiBase);
+			app.use(settings.apiBase, async (req, res, next) => {
+				console.log(`Trying to use apiBase? ...In`, settings.apiBase);
+				next();
+			});
+			*/
+	}
+	/*
+	else {
+		console.log(`Intitalize APP withoug base!!`);
+			app = express();
+	}
+	*/
+
+
 	app.set('port',settings.port)
 
 	if (settings.cors) {
@@ -152,7 +189,6 @@ export async function initApp(opts: GenObj = {}) {
 
 
 	//debugging...
-	/*
 	if (settings.static) { // Either true or a string path
 		let staticPath  = '';
 		if (settings.static === true) { //use default
@@ -166,22 +202,18 @@ export async function initApp(opts: GenObj = {}) {
 		console.log(`We think the static FE path should be: [${staticPath}]`);
 		app.use(express.static(staticPath));
 	}
+	/*
 	*/
 
 	/*
-	if (settings.apiBase) {
-		app.use(settings.apiBase, async (req, res, next) => {
-			next();
-		});
-	}
 	*/
 
 	/*
-	if (settings.killPort) {
-		await killPort(getPort());
-	}
 	*/
-	console.log(`Is the port REALLY: [${port}]?`);
+	console.log(`Is the port REALLY: [${port}]? Settings are:`, { settings });
+
+	// Have to listen on the port set here like:
+	// app.listen(app.get('port'), () => {console.log(`API server listening on port [${app.get('port')}]`)});
 
 	return app;
 }

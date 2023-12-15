@@ -19,21 +19,23 @@ let app = await initApp({
 //app.listen();
 
 app.get('/', async (req, res) => {
+	console.log("In api root");
 //app.get('/',  (req, res) => {
 	//return { this: "root" };
 	res.json( { this: "root" });
 });
 
-app.get('/test', async (req, res) => {
+app.get('test', async (req, res) => {
+	console.log("In test");
 //app.get('/test',  (req, res) => {
 	//return { this: "worked" };
 	res.json( { this: "worked again!" });
 });
 
-let lPort = getPort();
+//let lPort = getPort();
 
-app.listen(lPort, () => {console.log(`API server listening on port ${lPort}`)});
-//app.listen();
+//app.listen(lPort, () => {console.log(`API server listening on port ${lPort}`)});
+app.listen(app.get('port'), () => {console.log(`API server listening on port [${app.get('port')}]`)});
 
 //let appProps = allProps(app, 'tvp', 8);
 
