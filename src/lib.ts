@@ -139,6 +139,15 @@ export async function initApp(opts: GenObj = {}) {
 		apiRouter.get('/', (req, res) => {
 			res.json( { this: "root" });
     });
+
+		let apiAuthRouter = express.Router();
+		apiAuthRouter.get('/', (req, res) => {
+			res.json( { auth: "subauth" });
+    });
+
+		apiRouter.use('/auth', apiAuthRouter);
+
+   // app.use(apiBase, apiAuthRouter);
 		app.use(apiBase, apiRouter);
 		//app = express({ baseUrl: apiBase });
 		//app = express({ basepath: apiBase });
