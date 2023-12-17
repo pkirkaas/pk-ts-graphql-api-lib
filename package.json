@@ -33,6 +33,7 @@
     "evp_bytestokey": "*",
     "express": "*",
     "express-async-errors": "*",
+    "express-list-endpoints": "^6.0.0",
     "jsonwebtoken": "*",
     "kill-port": "*",
     "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working",
