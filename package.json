@@ -1,5 +1,5 @@
 {
-  "name": "pk-ts-api-lib",
+  "name": "pk-ts-graphql-api-lib",
   "author": "Paul Kirkaas",
   "license": "UNLICENSED",
   "description": "TS/JS Utilities for NodeJS Express APIs, including common & Node JS functions",
