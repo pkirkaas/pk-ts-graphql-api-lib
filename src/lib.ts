@@ -142,7 +142,16 @@ export async function initApp(opts: GenObj = {}) {
 	let appInitOpts: GenObj = {};
 
 	app = express();
-	app.pkrouters = {};
+	/**
+	 * To retrieve the routers used in the lib by implementing APIs - have to set them when using the router, like:
+	 * app.appRouters.apiRouter = apiRouter
+	 * app.appRouters.apiAuthRouter = apiAuthRouter 
+	 * 
+	 * Then in implementing API, can add paths/routes to the app by:
+	 * 
+	 * app.AppRouters.apiRouter.get('/anewroute', (req, res) => ....
+	 */
+	app.appRouters = {};
 	if (settings.apiBase) {
 		let apiBase = settings.apiBase;
 		let apiRouter = express.Router();
@@ -159,7 +168,7 @@ export async function initApp(opts: GenObj = {}) {
 
    // app.use(apiBase, apiAuthRouter);
 		app.use(apiBase, apiRouter);
-		app.pkrouters.apiRouter = apiRouter;
+		app.appRouters.apiRouter = apiRouter;
 		//app = express({ baseUrl: apiBase });
 		//app = express({ basepath: apiBase });
 		//app.set('base', apiBase);
