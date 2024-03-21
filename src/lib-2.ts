@@ -40,6 +40,7 @@ export function enhanceApp(app:any = null) {
 	return app;
 }
 
+/*
 eapp.listenPort = function (aport: any = null) {
 	if (!aport) {
 		aport = this.port;
@@ -52,6 +53,7 @@ eapp.listenPort = function (aport: any = null) {
 	}
 	return this.listen(aport, () => { console.log(`API server self listening on port [${aport}]`) });
 };
+*/
 
 
 

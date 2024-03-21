@@ -19,9 +19,12 @@ import 'express-async-errors';
 import cors from "cors";
 import bodyParser from "body-parser";
 import cookieParser from "cookie-parser";
+import { ApolloServer } from '@apollo/server';
+import { expressMiddleware } from '@apollo/server/express4';
+import { ApolloServerPluginDrainHttpServer } from '@apollo/server/plugin/drainHttpServer'; //A plugin to help apollo server gracefully shutdoown?
+import { makeExecutableSchema } from '@graphql-tools/schema';
 import {
-	getDirname, dbgWrt, GenObj, cwd,
-	getFilename, slashPath, typeOf,
+	getDirname, dbgWrt, GenObj, cwd, getFilename, slashPath, typeOf,
 	//} from "pk-ts-sqlite-lib";
 } from "pk-ts-node-lib";
 
@@ -96,6 +99,12 @@ export function getStaticPath(apath:any = null) {
  * 
  * 
  * @return initialized app
+ */
+
+/**
+ * Returns an express app w. GraphQL middleware - 
+ * @param opts 
+ * @returns 
  */
 export async function initApp(opts: GenObj = {}) {
 	/*
@@ -223,6 +232,9 @@ export async function initApp(opts: GenObj = {}) {
 
 	// Have to listen on the port set here like:
 	// app.listen(app.get('port'), () => {console.log(`API server listening on port [${app.get('port')}]`)});
+	app.listenDefault = () =>   {
+		return app.listen(app.get('port'), () => {console.log(`API server listening on port [${app.get('port')}]`)})
+	};
 
 	return app;
 }
