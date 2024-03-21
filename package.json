@@ -21,10 +21,12 @@
   },
   "scripts": {
     "build": "tsc -p ./tsconfig.json && tsc -p ./tsconfig.cjs.json",
-    "clean": "rm -rf ./dist ./node_modules package-lock.json && npm i"
+    "clean": "rm -rf ./dist ./node_modules package-lock.json && npm i",
+    "monitor": "nodemon --exec \"npm run build\" --ext js,jsx,ts,tsx,sass,css --delay 5 --watch ./src"
   },
   "dependencies": {
     "@apollo/server": "^4.10.1",
+    "@types/graphql": "^14.5.0",
     "bcrypt": "*",
     "body-parser": "*",
     "compression": "*",
