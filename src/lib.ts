@@ -142,6 +142,7 @@ export async function initApp(opts: GenObj = {}) {
 	let appInitOpts: GenObj = {};
 
 	app = express();
+	app.pkrouters = {};
 	if (settings.apiBase) {
 		let apiBase = settings.apiBase;
 		let apiRouter = express.Router();
@@ -158,6 +159,7 @@ export async function initApp(opts: GenObj = {}) {
 
    // app.use(apiBase, apiAuthRouter);
 		app.use(apiBase, apiRouter);
+		app.pkrouters.apiRouter = apiRouter;
 		//app = express({ baseUrl: apiBase });
 		//app = express({ basepath: apiBase });
 		//app.set('base', apiBase);
