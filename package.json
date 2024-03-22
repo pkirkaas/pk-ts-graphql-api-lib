@@ -38,6 +38,7 @@
     "express-async-errors": "*",
     "express-list-endpoints": "^6.0.0",
     "graphql": "^16.8.1",
+    "graphql-tag": "^2.12.6",
     "jsonwebtoken": "*",
     "kill-port": "*",
     "pk-ts-node-lib": "git+https://github.com/pkirkaas/pk-ts-node-lib.git#working",
